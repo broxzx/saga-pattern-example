@@ -5,6 +5,9 @@ spring:
   application:
     name: payment-service
 
+  kafka:
+    bootstrap-servers: http://localhost:9093
+
   data:
     mongodb:
       uri: mongodb://localhost:27002/payments

@@ -1,35 +1,35 @@
 version: '3.8'
 
 x-defaults: &default-backend
-#  restart: unless-stopped
+  restart: unless-stopped
   networks:
     - backend
 
 services:
   # ------------------------- message broker -------------------------
-  zookeeper-saga-pattern:
+  zookeeper:
     <<: *default-backend
-    container_name: zookeeper-saga-pattern
     image: confluentinc/cp-zookeeper:7.0.1
+    container_name: zookeeper-saga-pattern
     ports:
       - "2182:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
-  kafka-saga-pattern:
+  kafka:
     <<: *default-backend
-    container_name: kafka-saga-pattern
     image: confluentinc/cp-kafka:7.0.1
-    depends_on:
-      - zookeeper-saga-pattern
+    container_name: kafka-saga-pattern
     ports:
       - "9093:9092"
+    depends_on:
+      - zookeeper
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper-saga-pattern:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9093,PLAINTEXT_INTERNAL://kafka-saga-pattern:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1

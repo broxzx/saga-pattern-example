@@ -1,4 +1,4 @@
-package com.project.orderservice.orders.data.dto.request;
+package com.project.orderservice.userOrder.data.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class OrderRequestDto {
+public class UserOrderRequest {
 
-    private String orderId;
-
-    private String productId;
+    private String itemId;
 
     private String userId;
 
