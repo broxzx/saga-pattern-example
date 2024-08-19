@@ -15,4 +15,6 @@ public class ItemResponse {
 
     private long available;
 
+    private long price;
+
 }

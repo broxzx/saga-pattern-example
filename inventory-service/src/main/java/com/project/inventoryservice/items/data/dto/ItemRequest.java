@@ -15,4 +15,6 @@ public class ItemRequest {
 
     private long available;
 
+    private long price;
+
 }

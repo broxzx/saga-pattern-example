@@ -1,19 +1,15 @@
-package com.project.inventoryservice.items.data;
+package com.project.paymentservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "items")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Item {
-
-    private String id;
+public class ItemResponse {
 
     private String name;
 

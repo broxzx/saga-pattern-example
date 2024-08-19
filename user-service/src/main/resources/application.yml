@@ -9,6 +9,12 @@ spring:
     mongodb:
       uri: mongodb://localhost:27003/users
 
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9093
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
 eureka:
   client:
     service-url:

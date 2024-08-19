@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigInteger;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -17,6 +15,6 @@ public class UserRequest {
 
     private String email;
 
-    private BigInteger balance;
+    private long balance;
 
 }
