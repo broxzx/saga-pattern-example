@@ -10,8 +10,9 @@ spring:
       uri: mongodb://localhost:27000/orders
 
   kafka:
-    bootstrap-servers: localhost:9093
+#    bootstrap-servers: localhost:9093
     producer:
       bootstrap-servers: localhost:9093
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

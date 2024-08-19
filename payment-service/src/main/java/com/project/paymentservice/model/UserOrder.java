@@ -1,4 +1,4 @@
-package com.project.paymentservice.payments.data.dto.response;
+package com.project.paymentservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class PaymentResponseDto {
+public class UserOrder {
 
+    private String id;
 
+    private String itemId;
+
+    private String userId;
+
+    private int amount;
 
 }
