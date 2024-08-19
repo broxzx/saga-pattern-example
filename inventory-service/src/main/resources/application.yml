@@ -1,0 +1,15 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: inventory-service
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27004/inventory
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

@@ -62,6 +62,16 @@ services:
     environment:
       MONGO_INITDB_DATABASE: users
 
+  mongodb-inventory:
+    <<: *default-backend
+    container_name: mongodb-inventory
+    image: mongo:7.0-jammy
+    ports:
+      - "27004:27017"
+    environment:
+      MONGO_INITDB_DATABASE: inventory
+
+
 networks:
   backend:
     driver: bridge
