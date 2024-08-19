@@ -19,7 +19,9 @@ public class PaymentService {
     @KafkaListener(topics = "user-order-created", groupId = "payment-service")
     public void getOrder(String userOrderModel) {
         UserOrder mappedUserOrder = objectMapper.readValue(userOrderModel, UserOrder.class);
-        log.info("getOrder, {}", mappedUserOrder.toString());
+        log.info("getOrder, {}", mappedUserOrder);
+
+
     }
 
 }
