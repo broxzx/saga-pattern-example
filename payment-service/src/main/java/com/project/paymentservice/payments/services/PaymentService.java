@@ -1,4 +1,4 @@
-package com.project.paymentservice.kafka;
+package com.project.paymentservice.payments.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.paymentservice.model.UserOrder;
@@ -6,12 +6,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 @RequiredArgsConstructor
 @Slf4j
-public class KafkaConsumer {
+public class PaymentService {
 
     private final ObjectMapper objectMapper;
 
