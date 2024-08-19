@@ -1,15 +1,13 @@
 server:
-  port: 0
+  port: 8761
 
 spring:
   application:
-    name: user-service
-
-  data:
-    mongodb:
-      uri: mongodb://localhost:27003/users
+    name: eureka-discovery-service
 
 eureka:
   client:
+    fetch-registry: false
+    register-with-eureka: false
     service-url:
       defaultZone: http://localhost:8761/eureka

@@ -53,6 +53,15 @@ services:
     environment:
       MONGO_INITDB_DATABASE: payments
 
+  mongodb-users:
+    <<: *default-backend
+    container_name: mongodb-users
+    image: mongo:7.0-jammy
+    ports:
+      - "27003:27017"
+    environment:
+      MONGO_INITDB_DATABASE: users
+
 networks:
   backend:
     driver: bridge
