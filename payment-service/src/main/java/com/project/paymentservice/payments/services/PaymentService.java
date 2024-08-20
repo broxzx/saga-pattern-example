@@ -31,7 +31,6 @@ public class PaymentService {
     @KafkaListener(topics = "user-order-created", groupId = "payment-service")
     public void getOrder(String userOrderModel) {
         UserOrder mappedUserOrder = objectMapper.readValue(userOrderModel, UserOrder.class);
-        log.info("getOrder, {}", mappedUserOrder);
 
         UserResponse userResponse = userFeign.getUserById(mappedUserOrder.getUserId()).getBody();
         ItemResponse itemResponse = inventoryFeign.getItemById(mappedUserOrder.getItemId()).getBody();
@@ -44,7 +43,6 @@ public class PaymentService {
                 return;
             }
 
-            log.info("mappedUserOrder.getId(): {}", mappedUserOrder.getId());
             kafkaTemplate.send("user-order-success", mappedUserOrder.getId());
 
             // proceed payment
@@ -55,7 +53,10 @@ public class PaymentService {
                     .build());
 
             userResponse.setBalance(userResponse.getBalance() - priceUserToPay);
-            kafkaTemplate.send("update-user-balance", objectMapper.writeValueAsString(userResponse));
+            itemResponse.setAvailable(itemResponse.getAvailable() - mappedUserOrder.getAmount());
+
+            userFeign.updateUserBalance(userResponse.getId(), userResponse.getBalance());
+            inventoryFeign.updateItemAmount(itemResponse.getId(), itemResponse.getAvailable());
         }
     }
 

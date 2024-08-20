@@ -24,4 +24,9 @@ public class ItemController {
         return ResponseEntity.ok(itemService.getItemById(itemId));
     }
 
+    @PutMapping("/{id}/available")
+    public void updateItemAmount(@PathVariable("id") String itemId, @RequestBody long newAmount) {
+        itemService.updateItemAmount(itemId, newAmount);
+    }
+
 }

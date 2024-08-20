@@ -27,4 +27,12 @@ public class ItemService {
 
         return modelMapper.map(item, ItemResponse.class);
     }
+
+    public void updateItemAmount(String itemId, long newAmount) {
+        Item obtainedItem = itemRepository.findById(itemId)
+                .orElseThrow(() -> new RuntimeException("item with id '%s' is not found".formatted(itemId)));
+        obtainedItem.setAvailable(newAmount);
+
+        itemRepository.save(obtainedItem);
+    }
 }

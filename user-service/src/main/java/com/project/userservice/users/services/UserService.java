@@ -46,4 +46,13 @@ public class UserService {
         userRepository.save(obtainedUser);
     }
 
+    public void updateUserBalance(String userId, long newBalance) {
+        log.info("updateUserBalance: {}, newBalance: {}", userId, newBalance);
+        User obtainedUser = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("user with id '%s' is not found".formatted(userId)));
+
+        obtainedUser.setBalance(newBalance);
+        userRepository.save(obtainedUser);
+    }
+
 }

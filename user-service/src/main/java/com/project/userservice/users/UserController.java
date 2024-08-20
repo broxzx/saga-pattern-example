@@ -24,5 +24,10 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserById(userId));
     }
 
+    @PutMapping("/{id}/balance")
+    public void updateUserBalance(@PathVariable("id") String userId, @RequestBody long newBalance) {
+        userService.updateUserBalance(userId, newBalance);
+    }
+
 
 }

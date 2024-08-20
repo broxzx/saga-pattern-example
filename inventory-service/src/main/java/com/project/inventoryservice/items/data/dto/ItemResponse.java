@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ItemResponse {
 
+    private String id;
+
     private String name;
 
     private long available;
