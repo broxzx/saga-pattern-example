@@ -21,18 +21,21 @@ public class ItemService {
         return modelMapper.map(savedItem, ItemResponse.class);
     }
 
-    public ItemResponse getItemById(String itemId) {
-        Item item = itemRepository.findById(itemId)
-                .orElseThrow(() -> new RuntimeException("item with id '%s' is not found".formatted(itemId)));
+    public ItemResponse getItemResponseById(String itemId) {
+        Item item = getItemById(itemId);
 
         return modelMapper.map(item, ItemResponse.class);
     }
 
     public void updateItemAmount(String itemId, long newAmount) {
-        Item obtainedItem = itemRepository.findById(itemId)
-                .orElseThrow(() -> new RuntimeException("item with id '%s' is not found".formatted(itemId)));
+        Item obtainedItem = getItemById(itemId);
         obtainedItem.setAvailable(newAmount);
 
         itemRepository.save(obtainedItem);
+    }
+
+    private Item getItemById(String itemId) {
+        return itemRepository.findById(itemId)
+                .orElseThrow(() -> new RuntimeException("item with id '%s' is not found".formatted(itemId)));
     }
 }

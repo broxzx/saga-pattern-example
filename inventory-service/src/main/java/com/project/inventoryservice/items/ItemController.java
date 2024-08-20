@@ -21,7 +21,7 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ItemResponse> getItemById(@PathVariable("id") String itemId) {
-        return ResponseEntity.ok(itemService.getItemById(itemId));
+        return ResponseEntity.ok(itemService.getItemResponseById(itemId));
     }
 
     @PutMapping("/{id}/available")

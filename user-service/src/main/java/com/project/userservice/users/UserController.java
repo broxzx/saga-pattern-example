@@ -21,7 +21,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable("id") String userId) {
-        return ResponseEntity.ok(userService.getUserById(userId));
+        return ResponseEntity.ok(userService.getUserResponseById(userId));
     }
 
     @PutMapping("/{id}/balance")

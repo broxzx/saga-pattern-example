@@ -27,9 +27,8 @@ public class UserService {
         return modelMapper.map(savedUser, UserResponse.class);
     }
 
-    public UserResponse getUserById(String userId) {
-        User obtainedUser = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("user with id '%s' is not found".formatted(userId)));
+    public UserResponse getUserResponseById(String userId) {
+        User obtainedUser = getUserById(userId);
 
         return modelMapper.map(obtainedUser, UserResponse.class);
     }
@@ -39,8 +38,7 @@ public class UserService {
     public void updateUserBalance(String userModel) {
         log.info(userModel);
         User user = objectMapper.readValue(userModel, User.class);
-        User obtainedUser = userRepository.findById(user.getId())
-                .orElseThrow(() -> new RuntimeException("user with id '%s' is not found".formatted(user.getId())));
+        User obtainedUser = getUserById(user.getId());
 
         obtainedUser.setBalance(user.getBalance());
         userRepository.save(obtainedUser);
@@ -48,11 +46,15 @@ public class UserService {
 
     public void updateUserBalance(String userId, long newBalance) {
         log.info("updateUserBalance: {}, newBalance: {}", userId, newBalance);
-        User obtainedUser = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("user with id '%s' is not found".formatted(userId)));
+        User obtainedUser = getUserById(userId);
 
         obtainedUser.setBalance(newBalance);
         userRepository.save(obtainedUser);
     }
 
+
+    private User getUserById(String userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("user with id '%s' is not found".formatted(userId)));
+    }
 }
